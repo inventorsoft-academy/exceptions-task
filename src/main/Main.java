@@ -22,11 +22,13 @@ public class Main {
                 System.out.println(e.getMessage());
 
             } catch (DoubleSpaceException e) {
-                System.out.println("double space error");
+                System.out.println("double space error: "+e.getLocalizedMessage());
             }
 
         } catch (IOException e){
+            System.out.println(e.getCause().getMessage());
             e.printStackTrace();
+
         }
     }
 
