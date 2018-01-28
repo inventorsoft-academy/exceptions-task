@@ -44,10 +44,32 @@ public class ExceptionsTask {
 		}
 	}
 
+	private void usingMyCustomException(){
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.print("Enter command number ");
+		int command = 0;
+		try {
+			command = Integer.parseInt(bufferedReader.readLine());
+		} catch (NumberFormatException e) {
+			System.err.println("Your input is not a number!");
+			e.printStackTrace();
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		try{
+			if(command >= 5){
+				throw new WrongCommandException(command, "Invalid command! Must be less than 5");
+			}
+		}catch (WrongCommandException e){
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String...args){
 		ExceptionsTask et = new ExceptionsTask();
-		et.tryWithResources();
-		et.nestedTry();
-		et.usingThrowableMethods();
+//		et.tryWithResources();
+//		et.nestedTry();
+//		et.usingThrowableMethods();
+		et.usingMyCustomException();
 	}
 }

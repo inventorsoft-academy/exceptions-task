@@ -1,15 +1,15 @@
 public class WrongCommandException extends Exception {
-	private String command;
-	public WrongCommandException(String command) {
+	private int command;
+	public WrongCommandException(int command) {
 		this.command = command;
 	}
 
-	public WrongCommandException(String command,String message) {
+	public WrongCommandException(int command,String message) {
 		super(message);
 		this.command = command;
 	}
 
-	public String getCommand() {
+	public int getCommand() {
 		return command;
 	}
 
