@@ -1,37 +1,50 @@
 import java.io.*;
+import java.util.List;
 
 
 /**
  * Created by Komatoz on 25.01.2018.
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyIOException {
 
-            try{
-                throw new IOException();
-            }catch (IOException e){
-      //          throw new MyIOException();
-            }
+        // firs my Exception
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            System.out.println(reader.readLine());
+        } catch (IOException e) {
+            throw new MyIOException();
+        }
+
+        //second my Exception
+       myException(null);
+
 
 
 
     }
 
 
+    static void myException(List list){
+
+        if (list == null) {
+            throw new MyExceptionByRTE("to method myException comes bug");
+        }
+
+    }
 
 
-
-
-    public static void individualTask() {
+    static void individualTask() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Please write a number");
         try {
             int x = Integer.parseInt(reader.readLine());
-            System.out.printf("ok, %d is number",x);
+            System.out.printf("ok, %d is number", x);
         } catch (IOException e) {
             e.printStackTrace();
-        }catch (NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             individualTask();
         }
 
@@ -56,7 +69,7 @@ public class Main {
     }
 
 
-    void firstAndSSecondTask() {
+    static void firstAndSecondTask() {
         try (FileReader fr = new FileReader("wrongName")) {
             fr.read();
         } catch (IOException e) {
