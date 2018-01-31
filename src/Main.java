@@ -29,7 +29,7 @@ public class Main {
     static void myException(List list){
 
         if (list == null) {
-            throw new MyByRTEException("to method myException comes bug");
+            throw new MyByRTException("to method myException comes bug");
         }
 
     }
