@@ -29,7 +29,7 @@ public class Main {
     static void myException(List list){
 
         if (list == null) {
-            throw new MyExceptionByRTE("to method myException comes bug");
+            throw new MyByRTEException("to method myException comes bug");
         }
 
     }
@@ -45,7 +45,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NumberFormatException ex) {
-            individualTask();
+            System.out.println("entered characters are not the number");
         }
 
     }
