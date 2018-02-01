@@ -7,12 +7,17 @@ import java.util.List;
 
 public class Task {
     public static void main(String[] args) {
-        doStrartupOperations();
+        try {
+            doStartupOperations();
+        } catch (StartupConfigurationException e) {
+            System.out.println(e.getCause() + ", " + e.getMessage());
+            e.printStackTrace();
+        }
         nestedTryTest();
         testTryWithResources();
     }
 
-    private static void testTryWithResources() {
+    private static void testTryWithResources() throws IllegalCredentialException {
         URL url1 = Task.class.getResource("test.txt");
         URL url2 = Task.class.getResource("test1.txt");
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(url1.getPath()))) {
@@ -48,21 +53,10 @@ public class Task {
         }
     }
 
-    private static void doStrartupOperations() {
-        try {
-            URL url = Task.class.getResource("config.txt");
-            try {
-                BufferedReader bufferedReader = new BufferedReader(
-                        new FileReader(url.getPath()));
-                String conf = bufferedReader.readLine();
-                if (conf == null) {
-                    throw new StartupConfigurationException("Error in conf file!");
-                }
-            } catch (IOException e) {
-                System.out.println("Conf file not found");
-            }
-        } catch (StartupConfigurationException e) {
-            System.out.println("Startup conf exception caught");
+    private static void doStartupOperations() throws StartupConfigurationException {
+        URL url = Task.class.getResource("config.conf");
+        if (url == null) {
+            throw new StartupConfigurationException("Config file not found!");
         }
     }
 }
